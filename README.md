@@ -135,7 +135,77 @@ def Minimax(state):
             
     return action
 
+2.a  
 
+def Max_Value_AB(state, alpha=-INF, beta=INF):
+    global nodes_alphabeta
+    nodes_alphabeta += 1
 
+    if Terminal_Test(state):
+        return Utility(state)
 
+    v = -INF
+    for (a, s) in Successors(state, X):
+        v = max(v, Min_Value_AB(s, alpha, beta))
+        if v >= beta:
+            return v  # Beta-Cut
+        alpha = max(alpha, v)
+    return v
 
+def Min_Value_AB(state, alpha=-INF, beta=INF):
+    global nodes_alphabeta
+    nodes_alphabeta += 1
+
+    if Terminal_Test(state):
+        return Utility(state)
+
+    v = INF
+    for (a, s) in Successors(state, O):
+        v = min(v, Max_Value_AB(s, alpha, beta))
+        if v <= alpha:
+            return v  # Alpha-Cut
+        beta = min(beta, v)
+    return v
+
+def Minimax_AB(state):
+    val = -INF
+    action = None
+    alpha = -INF
+    beta = INF
+    for (a, s) in Successors(state, X):
+        v = Min_Value_AB(s, alpha, beta)
+        if v > val:
+            val = v
+            action = a
+        alpha = max(alpha, val)
+    return action
+
+Bei leeren Board (alle 9 Felder frei) prüft Minimax alle 9!=362880 möglichen Spielverläufe theoretisch.
+
+Mit Alpha-Beta-Pruning werden viele Knoten abgeschnitten, sobald ein Zug garantiert schlechter als ein bisher gefundener Zug ist.
+
+ Szenario zum Vergleich:
+
+ein Board testen, bei dem X oder O schon einige Felder besetzt hat, z.B.:
+
+board = "X O X    "
+
+Dann wird Alpha-Beta noch effizienter, weil viele Züge früh verworfen werden.
+
+# Games.05: Minimax generalisier
+
+Wurzel -> (1,2,3)
+
+Spieler 1 (x1​),K_A: (1, 2, 3), K_B: (-1, 5, 2), max(1,−1)=1-> (1, 2, 3)
+
+Spieler 2 (x2​),K_A (1, 2, 3), K_B: (6, 1, 2),   max(2,1)=2 ->(1, 2, 3)
+
+Spieler 2 (x2​),K_C: (-1, 5, 2), K_D: (5, 4, 5), max(5,4)=5 ->(-1, 5, 2)
+
+Spieler 3 (x3​), K_A(1, 2, 3), (4, 2, 1),  max(3,1)=3 ->(1, 2, 3)
+
+Spieler 3 (x3​),K_B(6, 1, 2), (7, 4, -1), max(2,−1)=2 ->(6, 1, 2)
+
+Spieler 3 (x3​),K_C(5, 1, -1), (-1, 5, 2),max(−1,2)=2 ->(-1, 5, 2)
+
+Spieler 3 (x3​), K_D(7, 7, -1), (5, 4, 5) ,max(−1,5)=5 ->(5, 4, 5)
