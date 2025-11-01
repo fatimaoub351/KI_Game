@@ -212,25 +212,51 @@ Spieler 3 (x3​), K_D(7, 7, -1), (5, 4, 5) ,max(−1,5)=5 ->(5, 4, 5)
 
 # Games.03: Minimax vereinfachen
 
-Bewertung durch den Minimax-Algorithmus
+----------------------------------------------Bewertung durch den Standard-Minimax-Algorithmus-------------------------------------------------------
+Wir berechnen die Werte von unten nach oben.
 
-Für den Knoten B, bei dem der MIN-Spieler am Zug ist, besitzen die Nachfolger die Werte 4 und 6. Der MIN-Spieler wählt den kleineren der beiden Werte, also min(4, 6) = 4. Damit hat der Knoten B den Ergebniswert 4.
+Ebene 2 (MAX-Knoten, Vorgänger der Blätter)
 
-Beim Knoten C handelt es sich ebenfalls um einen MIN-Spieler. Die Nachfolger-Werte sind 2 und 8. Hier wählt der MIN-Spieler den kleineren Wert, also min(2, 8) = 2. Somit ergibt sich für Knoten C der Wert 2.
+Knoten E1: wählt max(10, 5) = 10
 
-Beim Wurzelknoten A, bei dem der MAX-Spieler am Zug ist, liegen die bereits berechneten Werte der Nachfolger-Knoten vor, nämlich 4 und 2. Der MAX-Spieler wählt den größeren dieser Werte, also max(4, 2) = 4. Somit erhält der Wurzelknoten A den Ergebniswert 4.
+Knoten E2: wählt max(8, 3) = 8
 
-Das optimale Ergebnis für MAX ist 4.
+Knoten E3: wählt max(9, 15) = 15
 
-Bewertung durch den vereinfachten Negamax-Algorithmus
+Ebene 1 (MIN-Knoten)
 
-Für den Knoten B, bei dem der MIN-Spieler am Zug ist, besitzen die Nachfolger-Knoten die Werte 4 und 6. Diese Werte werden negiert zu −4 und −6. Anschließend wird das 
-Maximum dieser negierten Werte gebildet: max(−4, −6) = −4. Das Ergebnis für Knoten B ist somit −4.
+Knoten M1: wählt min(Wert E1) = min(10) = 10
 
-Beim Knoten C spielt ebenfalls der MIN-Spieler. Die Werte seiner Nachfolger-Knoten betragen 2 und 8. Nach der Negation ergeben sich die Werte −2 und −8. Das Maximum der negierten Werte ist max(−2, −8) = −2, daher ergibt sich für Knoten C der Wert −2.
+Knoten M2: wählt min(Wert E2, Wert E3) = min(8, 15) = 8
 
-Der Wurzelknoten A gehört zum MAX-Spieler und hat die bereits berechneten Werte −4 und −2 als Nachfolger. Diese Werte werden negiert, wodurch sich 4 und 2 ergeben. Das Maximum dieser Werte beträgt max(4, 2) = 4, und somit erhält der Wurzelknoten A den Wert 4.
+Ebene 0 (MAX-Knoten, Wurzel)
 
-Das Ergebnis an der Wurzel ist 4. Der Negamax-Algorithmus liefert somit das identische optimale Ergebnis wie der klassische Minimax-Algorithmus, verwendet jedoch nur eine einzige, einheitliche rekursive Funktion.
+Wurzel A: wählt max(Wert M1, Wert M2) = max(10, 8) = 10
 
+Ergebnis: Der optimale Wert für MAX ist 10.
 
+-------------------------------------------Bewertung durch den vereinfachten Negamax-Algorithmus----------------------------------------
+
+Negamax maximiert immer den negativen Wert des Nachfolgers.
+
+Ebene 2 (MAX-Knoten)
+
+Knoten E1: max(-(-10), -(-5)) = max(10, 5) = 10
+
+Knoten E2: max(-(-8), -(-3)) = max(8, 3) = 8
+
+Knoten E3: max(-9, -15) = 15
+
+Ebene 1 (MIN-Knoten)
+
+Knoten M1: max(-(Wert E1)) = max(-10) = -10
+
+Knoten M2: max(-(Wert E2), -(Wert E3)) = max(-8, -15) = -8
+
+Ebene 0 (MAX-Knoten, Wurzel)
+
+Wurzel A: max(-(Wert M1), -(Wert M2)) = max(-(-10), -(-8)) = max(10, 8) = 10
+
+--->Ergebnis:  der vereinfachte Negamax-Algorithmus liefert den optimalen Wert 10 für MAX.
+
+Beide Algorithmen sind äquivalent, da Negamax die Nullsummenspiel-Eigenschaft ausnutzt und dadurch die Min-Value-Funktion nicht benötigt.
