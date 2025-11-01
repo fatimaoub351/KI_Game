@@ -228,11 +228,11 @@ Bewertung durch den vereinfachten Negamax-Algorithmus
 
 Knoten  --    Spieler    --  Werte der Nachfolger-Knoten --  Negierte Werte der Nachfolger --- Berechnung   --    Ergebnis 
 
-B       ---      MIN    --      (4), (6)                 **       −4,−6                   ---     max(−4,−6)  **     -4
+B            MIN               (4), (6)                       −4,−6                           max(−4,−6)             -4
 
-C       ---    MIN     --     (2), (8)                   **     −2,−8                      --  max(−2,−8)     **   -2
+C           MIN               (2), (8)                        −2,−8                           max(−2,−8)              -2
 
-A (Wurzel) --- MAX     --     (-4), (-2)                  **  −(−4)=4,−(−2)=2              ---  max(4,2)      **     4
+A (Wurzel)  MAX              (-4), (-2)                       −(−4)=4,−(−2)=2                 max(4,2)                 4
 
 Das Ergebnis an der Wurzel ist 4. Der Negamax-Algorithmus liefert somit das identische optimale Ergebnis wie der klassische Minimax-Algorithmus, verwendet jedoch nur eine einzige, einheitliche rekursive Funktion.
 
