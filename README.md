@@ -216,11 +216,11 @@ Bewertung durch den Minimax-Algorithmus
 
 Knoten     -- Spieler  -- Nachfolger-Werte -- Berechnung  -- Ergebnis
 
-B,          -- MIN      --      4, 6        --  min(4,6)   --   4
+B,                  -- MIN                --      4, 6              --  min(4,6)         --   4
 
-C,         --  MIN        --    2, 8        --  min(2,8)    --  2
+C,                  --  MIN                 --    2, 8              --  min(2,8)          --  2
 
-A (Wurzel)   MAX            4, 2          max(4,2)     4
+A (Wurzel)           -- MAX                   --    4, 2            --   max(4,2)       --   4
 
 Das optimale Ergebnis für MAX ist 4.
 
