@@ -45,63 +45,94 @@ Bei C wurde in der gezeigten Reihenfolge E(=9) → F(=2) → G(=6) ausgewertet. 
 # Games.02: Optimale Spiele: Minimax und alpha-beta-Pruning
 
 X = "X"
+
 O = "O"
+
 EMPTY = " "
 
 def Terminal_Test(state):
+
     return winner(state) is not None or EMPTY not in state
 
 def Utility(state):
+
     w = winner(state)
+    
     if w == X: return 1
+    
     if w == O: return -1
+    
     return 0
 
 def winner(board):
+
     wins = [
-        [0,1,2],[3,4,5],[6,7,8],     # rows
-        [0,3,6],[1,4,7],[2,5,8],     # cols
-        [0,4,8],[2,4,6]              # diagonals
+        [0,1,2],[3,4,5],[6,7,8],     
+        [0,3,6],[1,4,7],[2,5,8],     
+        [0,4,8],[2,4,6]              
     ]
     for a,b,c in wins:
+    
         if board[a] != EMPTY and board[a] == board[b] == board[c]:
+        
             return board[a]
+            
     return None
 
 def Successors(state, player):
+
     return [(i, state[:i] + player + state[i+1:])
+    
             for i in range(9) if state[i] == EMPTY]
 
 INF = float("inf")
 
 def Max_Value(state):
+
     if Terminal_Test(state):
+    
         return Utility(state)
 
     v = -INF
+    
     for (a, s) in Successors(state, X):
+    
         v = max(v, Min_Value(s))
+        
     return v
 
 
 def Min_Value(state):
+
     if Terminal_Test(state):
+    
         return Utility(state)
 
     v = INF
+    
     for (a, s) in Successors(state, O):
+    
         v = min(v, Max_Value(s))
+        
     return v
 
 
 def Minimax(state):
+
     val = -INF
+    
     action = None
+    
     for (a, s) in Successors(state, X):
+    
         v = Min_Value(s)
+        
         if v > val:
+        
             val = v
+            
             action = a
+            
     return action
 
 
