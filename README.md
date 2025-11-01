@@ -214,11 +214,11 @@ Spieler 3 (x3​), K_D(7, 7, -1), (5, 4, 5) ,max(−1,5)=5 ->(5, 4, 5)
 
 Bewertung durch den Minimax-Algorithmus
 
-Knoten      Spieler   Nachfolger-Werte  Berechnung  Ergebnis
+Knoten     -- Spieler  -- Nachfolger-Werte -- Berechnung  -- Ergebnis
 
-B,           MIN            4, 6          min(4,6)     4
+B,          -- MIN      --      4, 6        --  min(4,6)   --   4
 
-C,           MIN            2, 8          min(2,8)     2
+C,         --  MIN        --    2, 8        --  min(2,8)    --  2
 
 A (Wurzel)   MAX            4, 2          max(4,2)     4
 
