@@ -213,6 +213,7 @@ Spieler 3 (x3​), K_D(7, 7, -1), (5, 4, 5) ,max(−1,5)=5 ->(5, 4, 5)
 # Games.03: Minimax vereinfachen
 
 ----------------------------------------------Bewertung durch den Standard-Minimax-Algorithmus-------------------------------------------------------
+
 Wir berechnen die Werte von unten nach oben.
 
 Ebene 2 (MAX-Knoten, Vorgänger der Blätter)
